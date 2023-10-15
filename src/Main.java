@@ -327,7 +327,7 @@ public class Main {
                                 if (rs > 0) {
                                     System.out.println(batter.getLastName() + " singled, " + rs + " runs scored");
                                     batter.setRbi(batter.getRbi() + rs);
-                                    int r = pitcher.getRuns() +1;
+                                    int r = pitcher.getRuns() + rs;
                                     pitcher.setRuns(r);
                                 } else {
                                     System.out.println(batter.getLastName() + " singled");
@@ -348,7 +348,7 @@ public class Main {
                                 if (rs > 0) {
                                     System.out.println(batter.getLastName() + " singled, " + rs + " runs scored");
                                     batter.setRbi(batter.getRbi() + rs);
-                                    int r = pitcher.getRuns() +1;
+                                    int r = pitcher.getRuns() + rs;
                                     pitcher.setRuns(r);
                                     if(halfInning >= numHalfInning && hme.getRuns() > awy.getRuns()) {
                                         break;
@@ -379,7 +379,7 @@ public class Main {
                                 if (rs > 0) {
                                     System.out.println(batter.getLastName() + " walked, " + rs + " runs scored");
                                     batter.setRbi(batter.getRbi() + rs);
-                                    int r = pitcher.getRuns() +1;
+                                    int r = pitcher.getRuns() + rs;
                                     pitcher.setRuns(r);
                                 } else {
                                     System.out.println(batter.getLastName() + " walked");
@@ -400,7 +400,7 @@ public class Main {
                                 if (rs > 0) {
                                     System.out.println(batter.getLastName() + " walked, " + rs + " runs scored");
                                     batter.setRbi(batter.getRbi() + rs);
-                                    int r = pitcher.getRuns() +1;
+                                    int r = pitcher.getRuns() + rs;
                                     pitcher.setRuns(r);
                                     if(halfInning >= numHalfInning && hme.getRuns() > awy.getRuns()) {
                                         break;
@@ -424,7 +424,7 @@ public class Main {
                                 awy.setRuns(a += rs);
                                 int h = pitcher.getHits() +1;
                                 pitcher.setHits(h);
-                                int r = pitcher.getRuns() +1;
+                                int r = pitcher.getRuns() + rs;
                                 pitcher.setRuns(r);
                                 System.out.println(batter.getLastName() + " homered, " + rs + " runs scored");
                                 batter.setRbi(batter.getRbi() + rs);
@@ -441,7 +441,7 @@ public class Main {
                                 hme.setRuns(a += rs);
                                 int h = pitcher.getHits() +1;
                                 pitcher.setHits(h);
-                                int r = pitcher.getRuns() +1;
+                                int r = pitcher.getRuns() + rs;
                                 pitcher.setRuns(r);
                                 System.out.println(batter.getLastName() + " homered, " + rs + " runs scored");
                                 batter.setRbi(batter.getRbi() + rs);
@@ -473,7 +473,7 @@ public class Main {
                                 if (rs > 0) {
                                     System.out.println(batter.getLastName() + " tripled, " + rs + " runs scored");
                                     batter.setRbi(batter.getRbi() + rs);
-                                    int r = pitcher.getRuns() +1;
+                                    int r = pitcher.getRuns() + rs;
                                     pitcher.setRuns(r);
                                 } else {
                                     System.out.println(batter.getLastName() + " tripled");
@@ -494,7 +494,7 @@ public class Main {
                                 if (rs > 0) {
                                     System.out.println(batter.getLastName() + " tripled, " + rs + " runs scored");
                                     batter.setRbi(batter.getRbi() + rs);
-                                    int r = pitcher.getRuns() +1;
+                                    int r = pitcher.getRuns() + rs;
                                     pitcher.setRuns(r);
                                     if(halfInning >= numHalfInning && hme.getRuns() > awy.getRuns()) {
                                         break;
@@ -525,7 +525,7 @@ public class Main {
                                 if (rs > 0) {
                                     System.out.println(batter.getLastName() + " doubled, " + rs + " runs scored");
                                     batter.setRbi(batter.getRbi() + rs);
-                                    int r = pitcher.getRuns() +1;
+                                    int r = pitcher.getRuns() + rs;
                                     pitcher.setRuns(r);
                                 } else {
                                     System.out.println(batter.getLastName() + " doubled");
@@ -546,7 +546,7 @@ public class Main {
                                 if (rs > 0) {
                                     System.out.println(batter.getLastName() + " doubled, " + rs + " runs scored");
                                     batter.setRbi(batter.getRbi() + rs);
-                                    int r = pitcher.getRuns() +1;
+                                    int r = pitcher.getRuns() + rs;
                                     pitcher.setRuns(r);
                                     if(halfInning >= numHalfInning && hme.getRuns() > awy.getRuns()) {
                                         break;
@@ -595,7 +595,6 @@ public class Main {
                 System.out.println("7.) Quit");
                 choice = scan.nextInt();
             } else if(choice == 6) {
-                System.out.println("Away Pitcher Runs: " + awy.getPitcher(aPitch, 0).getRuns());
                 System.out.printf("%-20s%-5s%-5s%-5s%-5s%-5s%-5s%n", away, "AB", "H", "RBI", "HR", "BB", "AVG");
                 for(int i = 0; i < aTeam.size(); i++) {
                     double avg = (double)awy.getPlayer(aTeam, i).getHits() / awy.getPlayer(aTeam, i).getAb();
