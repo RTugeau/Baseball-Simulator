@@ -350,7 +350,7 @@ public class Main {
                                     batter.setRbi(batter.getRbi() + rs);
                                     int r = pitcher.getRuns() + rs;
                                     pitcher.setRuns(r);
-                                    if(halfInning >= numHalfInning && hme.getRuns() > awy.getRuns()) {
+                                    if(halfInning >= numHalfInning -1 && hme.getRuns() > awy.getRuns()) {
                                         break;
                                     }
                                 } else {
@@ -402,7 +402,7 @@ public class Main {
                                     batter.setRbi(batter.getRbi() + rs);
                                     int r = pitcher.getRuns() + rs;
                                     pitcher.setRuns(r);
-                                    if(halfInning >= numHalfInning && hme.getRuns() > awy.getRuns()) {
+                                    if(halfInning >= numHalfInning -1 && hme.getRuns() > awy.getRuns()) {
                                         break;
                                     }
                                 } else {
@@ -446,7 +446,7 @@ public class Main {
                                 System.out.println(batter.getLastName() + " homered, " + rs + " runs scored");
                                 batter.setRbi(batter.getRbi() + rs);
                                 rs = 0;
-                                if(halfInning >= numHalfInning && hme.getRuns() > awy.getRuns()) {
+                                if(halfInning >= numHalfInning -1 && hme.getRuns() > awy.getRuns()) {
                                     break;
                                 }
                             }
@@ -496,7 +496,7 @@ public class Main {
                                     batter.setRbi(batter.getRbi() + rs);
                                     int r = pitcher.getRuns() + rs;
                                     pitcher.setRuns(r);
-                                    if(halfInning >= numHalfInning && hme.getRuns() > awy.getRuns()) {
+                                    if(halfInning >= numHalfInning -1 && hme.getRuns() > awy.getRuns()) {
                                         break;
                                     }
                                 } else {
@@ -548,7 +548,7 @@ public class Main {
                                     batter.setRbi(batter.getRbi() + rs);
                                     int r = pitcher.getRuns() + rs;
                                     pitcher.setRuns(r);
-                                    if(halfInning >= numHalfInning && hme.getRuns() > awy.getRuns()) {
+                                    if(halfInning >= numHalfInning -1 && hme.getRuns() > awy.getRuns()) {
                                         break;
                                     }
                                 } else {
