@@ -12,11 +12,13 @@ public class Main {
         String away = scan.nextLine();
         ArrayList<Player> aTeam = new ArrayList<>();
         ArrayList<Pitcher> aPitch = new ArrayList<>();
+        ArrayList<Pitcher> aPitched = new ArrayList<>();
         Team awy = new Team(away, aTeam, aPitch, 0, 0);
         System.out.println("Enter Home Team: ");
         String home = scan.nextLine();
         ArrayList<Player> hTeam = new ArrayList<>();
         ArrayList<Pitcher> hPitch = new ArrayList<>();
+        ArrayList<Pitcher> hPitched = new ArrayList<>();
         Team hme = new Team(home, hTeam, hPitch, 0, 0);
         System.out.println("Select an option below.");
         System.out.println("1.) Fill Away Lineup");
@@ -175,14 +177,28 @@ public class Main {
                     System.out.println(i + 1 + ": " + aTeam.get(i).getLastName());
                 }
                 System.out.println();
-                System.out.println(away + " Starting Pitcher: " + aPitch.get(0).getFirstName() + " " + aPitch.get(0).getLastName());
+                System.out.println("Select " + away + " Starting Pitcher");
+                for(int sap = 0; sap < aPitch.size(); sap++) {
+                    System.out.println(sap + ".) " + aPitch.get(sap).getFirstName() + " " + aPitch.get(sap).getLastName());
+                }
+                int asp = scan.nextInt();
+                System.out.println(away + " Starting Pitcher: " + aPitch.get(asp).getFirstName() + " " + aPitch.get(asp).getLastName());
+                aPitched.add(aPitch.get(asp));
+                aPitch.get(asp).setPitched(true);
                 System.out.println();
                 System.out.println(home + " Lineup");
                 for (int j = 0; j < hTeam.size(); j++) {
                     System.out.println(j + 1 + ": " + hTeam.get(j).getLastName());
                 }
                 System.out.println();
-                System.out.println(home + " Starting Pitcher: " + hPitch.get(0).getFirstName() + " " + hPitch.get(0).getLastName());
+                System.out.println("Select " + home + " Starting Pitcher");
+                for(int shp = 0; shp < hPitch.size(); shp++) {
+                    System.out.println(shp + ".) " + hPitch.get(shp).getFirstName() + " " + hPitch.get(shp).getLastName());
+                }
+                int hsp = scan.nextInt();
+                System.out.println(home + " Starting Pitcher: " + hPitch.get(hsp).getFirstName() + " " + hPitch.get(hsp).getLastName());
+                hPitched.add(hPitch.get(hsp));
+                hPitch.get(hsp).setPitched(true);
                 System.out.println();
                 System.out.println("Enter Game Length (3) innings, (6) innings, (9) innings: ");
                 int gameLength = scan.nextInt();
@@ -201,8 +217,8 @@ public class Main {
                 int aPlays = 0;
                 int hPlays = 0;
                 Pitcher pitcher;
-                Pitcher ap = awy.getPitcher(aPitch, 0);
-                Pitcher hp = hme.getPitcher(hPitch, 0);
+                Pitcher ap = awy.getPitcher(aPitch, asp);
+                Pitcher hp = hme.getPitcher(hPitch, hsp);
                 int numHp = 1;
                 int numAp = 1;
                 while (halfInning < 100) {
@@ -226,7 +242,7 @@ public class Main {
                                     System.out.println("No more available pitchers");
                                     continue;
                                 } else {
-                                    for (int i = 1; i < hPitch.size(); i++) {
+                                    for (int i = 0; i < hPitch.size(); i++) {
                                         if (!hPitch.get(i).getPitched()) {
                                             System.out.println(i + ".) " + hPitch.get(i).getFirstName() + " " + hPitch.get(i).getLastName());
                                         }
@@ -235,6 +251,7 @@ public class Main {
                                 int z = scan.nextInt();
                                 hp = hPitch.get(z);
                                 hp.setPitched(true);
+                                hPitched.add(hp);
                                 numHp++;
                             }
                         }
@@ -250,7 +267,7 @@ public class Main {
                                     System.out.println("No more available pitchers");
                                     continue;
                                 } else {
-                                    for (int i = 1; i < aPitch.size(); i++) {
+                                    for (int i = 0; i < aPitch.size(); i++) {
                                         if (!aPitch.get(i).getPitched()) {
                                             System.out.println(i + ".) " + aPitch.get(i).getFirstName() + " " + aPitch.get(i).getLastName());
                                         }
@@ -259,6 +276,7 @@ public class Main {
                                 int z = scan.nextInt();
                                 ap = aPitch.get(z);
                                 ap.setPitched(true);
+                                aPitched.add(ap);
                                 numAp++;
                             }
                         }
@@ -276,8 +294,10 @@ public class Main {
                             hPlays++;
                         }
                         Random rand = new Random();
-                        int play = rand.nextInt(20) + 1;
-                        if (play == 1 || play == 2 || play == 10 || play == 16 || play == 20) {
+                        int play = rand.nextInt(100) + 1;
+                        if (play == 1 || play == 2 || play == 10 || play == 16 || play == 20 || play == 23 || play == 26 || play == 29 || play == 34 || play == 44 || play == 46
+                                || play == 49 || play == 57 || play == 60 || play == 65 || play == 74 || play == 78 || play == 79 || play == 84 || play == 85 || play == 90
+                                || play == 93 || play == 98 || play == 99) {
                             outs++;
                             int b = batter.getAb() +1;
                             batter.setAB(b);
@@ -287,7 +307,8 @@ public class Main {
                             pitcher.setK(k);
                             System.out.println(batter.getLastName() + " struck out " + outs + " OUTS");
                             Thread.sleep(2000);
-                        } else if (play == 4 || play == 11 || play == 13 || play == 15) {
+                        } else if (play == 4 || play == 11 || play == 13 || play == 15 || play == 28 || play == 35 || play == 38 || play == 40 || play == 42 || play == 47 || play == 50
+                                || play == 55 || play == 59 || play == 68 || play == 69 || play == 80 || play == 81 || play == 87) {
                             outs++;
                             int b = batter.getAb() + 1;
                             batter.setAB(b);
@@ -295,7 +316,7 @@ public class Main {
                             pitcher.setOr(or);
                             System.out.println(batter.getLastName() + " grounded out " + outs + " OUTS");
                             Thread.sleep(2000);
-                        } else if (play == 6 || play == 17) {
+                        } else if (play == 6 || play == 17 || play == 27 || play == 52 || play == 62 || play == 63 || play == 88 || play == 91) {
                             outs++;
                             int b = batter.getAb() + 1;
                             batter.setAB(b);
@@ -303,7 +324,15 @@ public class Main {
                             pitcher.setOr(or);
                             System.out.println(batter.getLastName() + " lined out " + outs + " OUTS");
                             Thread.sleep(2000);
-                        } else if (play == 8 || play == 9 || play == 19) {
+                        } else if (play == 36 || play == 75 || play == 100) {
+                            outs++;
+                            int b = batter.getAb() + 1;
+                            batter.setAB(b);
+                            int or = pitcher.getOr() +1;
+                            pitcher.setOr(or);
+                            System.out.println(batter.getLastName() + " popped out " + outs + " OUTS");
+                            Thread.sleep(2000);
+                        } else if (play == 8 || play == 9 || play == 19 || play == 22 || play == 31 || play == 53 || play == 66 || play == 67 || play == 77 || play == 86 || play == 92 || play == 95) {
                             outs++;
                             int b = batter.getAb() + 1;
                             batter.setAB(b);
@@ -311,7 +340,8 @@ public class Main {
                             pitcher.setOr(or);
                             System.out.println(batter.getLastName() + " flied out " + outs + " OUTS");
                             Thread.sleep(2000);
-                        } else if (play == 3 || play == 12) {
+                        } else if (play == 3 || play == 12 || play == 21 || play == 32 || play == 39 || play == 43 || play == 45 || play == 54 || play == 56 || play == 58
+                                || play == 70 || play == 76 || play == 89 || play == 94 || play == 96 || play == 97) {
                             if (halfInning % 2 == 0) {
                                 int a = awy.getHits() + 1;
                                 awy.setHits(a);
@@ -334,15 +364,15 @@ public class Main {
                                 }
                                 rs = 0;
                             } else {
-                                int a = hme.getHits() + 1;
+                                int a = hme.getHits() + 1;                       // Adds 1 hit to home teams total hits
                                 hme.setHits(a);
-                                int h = pitcher.getHits() +1;
+                                int h = pitcher.getHits() +1;                    // Adds 1 hit to current pitchers allowed hits
                                 pitcher.setHits(h);
-                                br = baserunning(play, first, second, third);
-                                rs += br[0];
-                                first = br[1];
-                                second = br[2];
-                                third = br[3];
+                                br = baserunning(play, first, second, third);    // Function call to handle base running (returns values for base runner placement in array)
+                                rs += br[0];                                     // # of runs scored on play
+                                first = br[1];                                   // 1 if runner on 1st, 0 if not
+                                second = br[2];                                  // 1 if runner on 2nd, 0 if not
+                                third = br[3];                                   // 1 if runner on 3rd, 0 if not
                                 a = hme.getRuns();
                                 hme.setRuns(a += rs);
                                 if (rs > 0) {
@@ -350,9 +380,6 @@ public class Main {
                                     batter.setRbi(batter.getRbi() + rs);
                                     int r = pitcher.getRuns() + rs;
                                     pitcher.setRuns(r);
-                                    if(halfInning >= numHalfInning -1 && hme.getRuns() > awy.getRuns()) {
-                                        break;
-                                    }
                                 } else {
                                     System.out.println(batter.getLastName() + " singled");
                                 }
@@ -363,7 +390,10 @@ public class Main {
                             int hits = batter.getHits() + 1;
                             batter.setHits(hits);
                             Thread.sleep(2000);
-                        } else if (play == 5) {
+                            if(halfInning >= numHalfInning -1 && hme.getRuns() > awy.getRuns()) {
+                                break;
+                            }
+                        } else if (play == 5 || play == 24 || play == 25 || play == 30 || play == 33 || play == 41 || play == 72 || play == 82 || play == 83) {
                             if (halfInning % 2 == 0) {
                                 br = baserunning(play, first, second, third);
                                 rs += br[0];
@@ -402,16 +432,16 @@ public class Main {
                                     batter.setRbi(batter.getRbi() + rs);
                                     int r = pitcher.getRuns() + rs;
                                     pitcher.setRuns(r);
-                                    if(halfInning >= numHalfInning -1 && hme.getRuns() > awy.getRuns()) {
-                                        break;
-                                    }
                                 } else {
                                     System.out.println(batter.getLastName() + " walked");
                                 }
                                 rs = 0;
                             }
                             Thread.sleep(2000);
-                        } else if (play == 7) {
+                            if(halfInning >= numHalfInning -1 && hme.getRuns() > awy.getRuns()) {
+                                break;
+                            }
+                        } else if (play == 7 || play == 48 || play == 51 || play == 73) {
                             if (halfInning % 2 == 0) {
                                 int a = awy.getHits() + 1;
                                 awy.setHits(a);
@@ -446,9 +476,6 @@ public class Main {
                                 System.out.println(batter.getLastName() + " homered, " + rs + " runs scored");
                                 batter.setRbi(batter.getRbi() + rs);
                                 rs = 0;
-                                if(halfInning >= numHalfInning -1 && hme.getRuns() > awy.getRuns()) {
-                                    break;
-                                }
                             }
                             int b = batter.getAb() + 1;
                             batter.setAB(b);
@@ -457,6 +484,9 @@ public class Main {
                             int hr = batter.getHr() + 1;
                             batter.setHr(hr);
                             Thread.sleep(2000);
+                            if(halfInning >= numHalfInning -1 && hme.getRuns() > awy.getRuns()) {
+                                break;
+                            }
                         } else if (play == 14) {
                             if (halfInning % 2 == 0) {
                                 int a = awy.getHits() + 1;
@@ -496,9 +526,6 @@ public class Main {
                                     batter.setRbi(batter.getRbi() + rs);
                                     int r = pitcher.getRuns() + rs;
                                     pitcher.setRuns(r);
-                                    if(halfInning >= numHalfInning -1 && hme.getRuns() > awy.getRuns()) {
-                                        break;
-                                    }
                                 } else {
                                     System.out.println(batter.getLastName() + " tripled");
                                 }
@@ -509,7 +536,10 @@ public class Main {
                             int hits = batter.getHits() + 1;
                             batter.setHits(hits);
                             Thread.sleep(2000);
-                        } else if (play == 18) {
+                            if(halfInning >= numHalfInning -1 && hme.getRuns() > awy.getRuns()) {
+                                break;
+                            }
+                        } else if (play == 18 || play == 37 || play == 61 || play == 64 || play == 71) {
                             if (halfInning % 2 == 0) {
                                 int a = awy.getHits() + 1;
                                 awy.setHits(a);
@@ -548,9 +578,6 @@ public class Main {
                                     batter.setRbi(batter.getRbi() + rs);
                                     int r = pitcher.getRuns() + rs;
                                     pitcher.setRuns(r);
-                                    if(halfInning >= numHalfInning -1 && hme.getRuns() > awy.getRuns()) {
-                                        break;
-                                    }
                                 } else {
                                     System.out.println(batter.getLastName() + " doubled");
                                 }
@@ -561,6 +588,9 @@ public class Main {
                             int hits = batter.getHits() + 1;
                             batter.setHits(hits);
                             Thread.sleep(2000);
+                            if(halfInning >= numHalfInning -1 && hme.getRuns() > awy.getRuns()) {
+                                break;
+                            }
                         }
                     }
                     if (halfInning % 2 == 0) {
@@ -604,13 +634,13 @@ public class Main {
                 }
                 System.out.println();
                 System.out.printf("%-20s%-5s%-5s%-5s%-5s%-5s%-5s%n", away, "IP", "R", "H", "K", "BB", "ERA");
-                for(int i = 0; i < aPitch.size(); i++) {
-                    double ip = awy.getPitcher(aPitch, i).getOr() / 3.0;
-                    awy.getPitcher(aPitch, i).setIp(ip);
-                    double era = 9.0 * awy.getPitcher(aPitch, i).getRuns() / awy.getPitcher(aPitch, i).getIp();
-                    System.out.printf("%-20s%-5.1f%-5d%-5d%-5d%-5d%-6.3f%n", awy.getPitcher(aPitch, i).getFirstName() + " " + awy.getPitcher(aPitch, i).getLastName(), awy.getPitcher(aPitch, i).getIp(),
-                            awy.getPitcher(aPitch, i).getRuns(), awy.getPitcher(aPitch, i).getHits(), awy.getPitcher(aPitch, i).getK(), awy.getPitcher(aPitch, i).getBb(), era);
-                    awy.getPitcher(aPitch, i).setEra(era);
+                for(int i = 0; i < aPitched.size(); i++) {
+                    double ip = aPitched.get(i).getOr() / 3.0;
+                    aPitched.get(i).setIp(ip);
+                    double era = 9.0 * aPitched.get(i).getRuns() / aPitched.get(i).getIp();
+                    System.out.printf("%-20s%-5.1f%-5d%-5d%-5d%-5d%-6.3f%n", aPitched.get(i).getFirstName() + " " + aPitched.get(i).getLastName(), aPitched.get(i).getIp(),
+                            aPitched.get(i).getRuns(), aPitched.get(i).getHits(), aPitched.get(i).getK(), aPitched.get(i).getBb(), era);
+                    aPitched.get(i).setEra(era);
                 }
                 System.out.println();
                 System.out.printf("%-20s%-5s%-5s%-5s%-5s%-5s%-5s%n", home, "AB", "H", "RBI", "HR", "BB", "AVG");
@@ -622,14 +652,15 @@ public class Main {
                 }
                 System.out.println();
                 System.out.printf("%-20s%-5s%-5s%-5s%-5s%-5s%-5s%n", home, "IP", "R", "H", "K", "BB", "ERA");
-                for(int i = 0; i < hPitch.size(); i++) {
-                    double ip = hme.getPitcher(hPitch, i).getOr() / 3.0;
-                    hme.getPitcher(hPitch, i).setIp(ip);
-                    double era = 9.0 * hme.getPitcher(hPitch, i).getRuns() / hme.getPitcher(hPitch, i).getIp();
-                    System.out.printf("%-20s%-5.1f%-5d%-5d%-5d%-5d%-6.3f%n", hme.getPitcher(hPitch, i).getFirstName() + " " + hme.getPitcher(hPitch, i).getLastName(), ip,
-                            hme.getPitcher(hPitch, i).getRuns(), hme.getPitcher(hPitch, i).getHits(), hme.getPitcher(hPitch, i).getK(), hme.getPitcher(hPitch, i).getBb(), era);
-                    hme.getPitcher(hPitch, i).setEra(era);
+                for(int i = 0; i < hPitched.size(); i++) {
+                    double ip = hPitched.get(i).getOr() / 3.0;
+                    hPitched.get(i).setIp(ip);
+                    double era = 9.0 * hPitched.get(i).getRuns() / hPitched.get(i).getIp();
+                    System.out.printf("%-20s%-5.1f%-5d%-5d%-5d%-5d%-6.3f%n", hPitched.get(i).getFirstName() + " " + hPitched.get(i).getLastName(), ip,
+                            hPitched.get(i).getRuns(), hPitched.get(i).getHits(), hPitched.get(i).getK(), hPitched.get(i).getBb(), era);
+                    hPitched.get(i).setEra(era);
                 }
+                System.out.println();
                 System.out.println("Select an option below.");
                 System.out.println("1.) Fill Away Lineup");
                 System.out.println("2.) Fill Home Lineup");
@@ -656,7 +687,8 @@ public class Main {
     public static int[] baserunning(int play, int first, int second, int third) {
         int rs = 0;
         int[] br = new int[4];
-        if(play == 3 || play == 12) {
+        if(play == 3 || play == 12 || play == 21 || play == 32 || play == 39 || play == 43 || play == 45 || play == 54 || play == 56 || play == 58
+                || play == 70 || play == 76 || play == 89 || play == 94 || play == 96 || play == 97) {
             if(first != 0) {
                 if(second != 0) {
                     if(third != 0) {
@@ -694,7 +726,7 @@ public class Main {
                     }
                 }
             }
-        } else if(play == 18) {
+        } else if(play == 18 || play == 37 || play == 61 || play == 64 || play == 71) {
             if(first != 0) {
                 if(second != 0) {
                     if(third != 0) {
@@ -775,7 +807,7 @@ public class Main {
                     }
                 }
             }
-        } else if(play == 5) {
+        } else if(play == 5 || play == 24 || play == 25 || play == 30 || play == 33 || play == 41 || play == 72 || play == 82 || play == 83) {
             if(first != 0) {
                 if(second != 0) {
                     if(third != 0) {
@@ -789,7 +821,7 @@ public class Main {
             } else {
                 first = 1;
             }
-        } else if(play == 7) {
+        } else if(play == 7 || play == 48 || play == 51 || play == 73) {
             rs++;
             if(first != 0) {
                 rs++;
